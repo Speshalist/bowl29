@@ -94,6 +94,9 @@ nav {
 .nav-menu a:hover,
 .nav-menu a.active {
     color: var(--bowl29-red);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
 }
 
 .nav-actions {
@@ -306,6 +309,30 @@ nav {
     border-radius: 0.5rem;
     font-size: 0.875rem;
     color: #744210;
+}
+
+#Schedule.display tbody tr.odd {
+    background-color: #FEF5E7 !important; /* Lighter grey for odd rows */
+}
+
+#Schedule.display tbody tr.even {
+    background-color: #ffffff !important; /* White for even rows */
+}
+
+#Schedule.display dataTable tbody tr.odd td {
+    background-color: #FEF5E7 !important;
+}
+
+#Schedule.display dataTable tbody tr.even td {
+    background-color: #ffffff !important;
+}
+
+#Schedule.dataTable tbody tr:nth-child(odd) td {
+  background-color: #FEF5E7 !important;
+}
+
+#Schedule.dataTable tbody tr:nth-child(even) td {
+  background-color: #ffffff !important;
 }
 
 /* Menu Section */

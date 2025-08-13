@@ -10,8 +10,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.min.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
+    
 <body>
     <!-- Header -->
     <header>
@@ -62,7 +64,7 @@
             </h1>
             <p>Come have a bite with us! Asian and American cuisine together in every delicious dish.</p>
             <div class="hero-buttons">
-                <a href="#menu" class="btn btn-yellow">View Our Menu</a>
+                <a href="menu.html" class="btn btn-yellow">View Our Menu</a>
                 <a href="#location" class="btn btn-green">Find Our Location</a>
             </div>
             <!--
@@ -182,6 +184,7 @@
                     </table>
 		<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/2.3.2/js/dataTables.min.js"></script>
+                    <!--
 	<script>
 		new DataTable('#Schedule', {
 			ajax: 'https://script.google.com/macros/s/AKfycbxiIUoPhLViGH9G3hpOTY4cI4k2GotlkCX9cvHhGEm9duzSzn2u3nZUlx2mp2bjfOQx/exec',
@@ -197,6 +200,68 @@
             info: false
 		});
 	</script>
+                    -->
+<script>
+    const CACHE_KEY = 'scheduleData';
+    const CACHE_EXPIRY_MS = 3600000; // 1 hour in milliseconds
+
+    // Function to check if the cache is still valid
+    function isCacheValid(cacheData) {
+        if (!cacheData || !cacheData.timestamp) {
+            return false;
+        }
+        const now = new Date().getTime();
+        return (now - cacheData.timestamp) < CACHE_EXPIRY_MS;
+    }
+
+    // Get the cached data from local storage
+    const cachedData = JSON.parse(localStorage.getItem(CACHE_KEY));
+
+    let initialData = null;
+    let ajaxUrl = null;
+
+    if (isCacheValid(cachedData)) {
+        // Use cached data if it's valid
+        initialData = cachedData.data;
+        console.log('Using cached data.');
+    } else {
+        // Set the AJAX URL to fetch fresh data
+        ajaxUrl = 'https://script.google.com/macros/s/AKfycbxiIUoPhLViGH9G3hpOTY4cI4k2GotlkCX9cvHhGEm9duzSzn2u3nZUlx2mp2bjfOQx/exec';
+        console.log('Fetching new data from server.');
+    }
+
+    new DataTable('#Schedule', {
+        data: initialData, // Use the cached data initially
+        ajax: ajaxUrl, // Only make the AJAX call if initialData is null
+        columns: [
+            { data: 'Date', type: "date", format: "DD/MM/YYYY" },
+            { data: 'Day' },
+            { data: 'Time' },
+            { data: 'Location' },
+            { data: 'Address' }
+        ],
+        ordering: false,
+        paging: false,
+        searching: false,
+        info: false,
+
+        // This callback function runs after the data has been loaded
+        // and is a good place to save new data to the cache.
+        initComplete: function (settings, json) {
+            if (json && json.data) {
+                // Only save to cache if we just fetched new data
+                if (ajaxUrl) {
+                    const dataToCache = {
+                        data: json.data,
+                        timestamp: new Date().getTime()
+                    };
+                    localStorage.setItem(CACHE_KEY, JSON.stringify(dataToCache));
+                    console.log('New data cached successfully.');
+                }
+            }
+        }
+    });
+</script>
                     <!-- End Google Sheet Example -->
                     
                     <div class="note-box">
@@ -282,7 +347,7 @@
 
             <div class="text-center" style="margin-top: 2rem;">
                 <div class="hero-buttons">
-                <a href="#menu" class="btn btn-yellow">View Our Menu</a>
+                <a href="menu.html" class="btn btn-yellow">View Our Menu</a>
                 <a href="https://foodtruck.pub/order/menu.aspx?busid=13186" target="_blank" class="btn btn-blue">Order Online</a>
                 </div>
             </div>
@@ -422,6 +487,39 @@
                 // Close mobile menu if open
                 document.getElementById('navMenu').classList.remove('active');
             });
+        });
+
+        //Highlight menu item depending on section of the page
+        $(document).ready(function() {
+          // Add an event listener for the scroll event
+          $(window).on('scroll', function() {
+            // Get the current scroll position
+            var scrollPosition = $(window).scrollTop();
+        
+            // Loop through each section with a corresponding ID
+            $('div[id], section[id]').each(function() {
+              var sectionTop = $(this).offset().top - 100; // Buffer for better timing
+              var sectionBottom = sectionTop + $(this).outerHeight();
+        
+              // Check if the current scroll position is within the section
+              if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                var sectionId = $(this).attr('id');
+                
+                // Remove the active class from all links
+                $('.nav-menu li a').removeClass('active');
+                
+                // Add the active class to the link that corresponds to the visible section
+                // Note: The href must match the section ID
+                $('a[href="index.html#' + sectionId + '"]').addClass('active');
+              }
+            });
+        
+            // Handle the 'Home' link which is a special case
+            if (scrollPosition === 0) {
+              $('.nav-menu li a').removeClass('active');
+              $('a[href="index.html"]').addClass('active');
+            }
+          });
         });
 
         // Form submission (basic alert for demo)
