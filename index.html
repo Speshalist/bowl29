@@ -245,6 +245,14 @@
         searching: false,
         info: false,
 
+        // Add data-label attributes for mobile stacked view
+        createdRow: function (row, data, dataIndex) {
+            const headers = ['Date', 'Day', 'Time', 'Location', 'Address'];
+            $('td', row).each(function (colIndex) {
+                $(this).attr('data-label', headers[colIndex]);
+            });
+        },
+
         // This callback function runs after the data has been loaded
         // and is a good place to save new data to the cache.
         initComplete: function (settings, json) {
@@ -290,17 +298,17 @@
             </div>
 
             <div class="menu-grid">
-                <!-- Korean BBQ Bowl -->
+                <!-- B29 Ramen Bowl -->
                 <div class="dish-card">
-                    <img src="images/dish_image_1.jpeg" alt="Korean BBQ Bowl" class="dish-image">
+                    <img src="images/dish_image_b29_ramen.jpeg" alt="B29 Ramen" class="dish-image">
                     <div class="dish-content">
-                        <h3 class="dish-name">Korean BBQ Bowl</h3>
+                        <h3 class="dish-name">B29 Ramen</h3>
                         <div class="dish-labels">
-                            <span class="dish-label label-beef">Beef</span>
+                            <span class="dish-label label-chicken">Chicken</span>
                             <span class="dish-label label-spicy">Spicy</span>
                         </div>
                         <p class="dish-description">
-                            Tender marinated beef with kimchi, pickled vegetables, and spicy gochujang sauce over steamed rice
+                            Honey ginger roasted chicken thigh, B29 broth, charred corn, roasted mushrooms, B29 slaw, furikake garlic chili crunch.           
                         </p>
                         <div class="dish-footer">
                             <span class="dish-price">$12.99</span>
@@ -310,15 +318,15 @@
 
                 <!-- Fusion Chicken Bowl -->
                 <div class="dish-card">
-                    <img src="images/dish_image_3.jpeg" alt="Fusion Chicken Bowl" class="dish-image">
+                    <img src="images/dish_image_hi_hushies.jpeg" alt="Hawaiian Hushies Bowl" class="dish-image">
                     <div class="dish-content">
-                        <h3 class="dish-name">Fusion Chicken Bowl</h3>
+                        <h3 class="dish-name">Hawaiian Hushies Bowl</h3>
                         <div class="dish-labels">
-                            <span class="dish-label label-chicken">Chicken</span>
+                            <span class="dish-label label-chicken">Pork</span>
                             <span class="dish-label label-mild">Mild</span>
                         </div>
                         <p class="dish-description">
-                            Crispy chicken with Asian slaw, corn, and our signature orange-sesame sauce
+                            Smoked kalua pork, sweet corn bacon hush puppies, cherry tomato peanut lomi,B29 slaw, honey mango chipolte sauce
                         </p>
                         <div class="dish-footer">
                             <span class="dish-price">$11.99</span>
@@ -326,17 +334,16 @@
                     </div>
                 </div>
 
-                <!-- Veggie Delight Bowl -->
+                <!-- The Go To Bowl -->
                 <div class="dish-card">
-                    <img src="images/dish_image_2.jpeg" alt="Veggie Delight Bowl" class="dish-image">
+                    <img src="images/dish_image_the_go_to.jpeg" alt="The Go To" class="dish-image">
                     <div class="dish-content">
-                        <h3 class="dish-name">Veggie Delight Bowl</h3>
+                        <h3 class="dish-name">The Go To</h3>
                         <div class="dish-labels">
-                            <span class="dish-label label-vegetarian">Vegetarian</span>
-                            <span class="dish-label label-dairy-free">Dairy-Free</span>
+                            <span class="dish-label label-pork">Pork</span>
                         </div>
                         <p class="dish-description">
-                            Fresh seasonal vegetables, tofu, and quinoa with tahini-ginger dressing
+                            Crispy tonkatsu pork cutlet, katsu sauce, macaroni salad, B29 slaw
                         </p>
                         <div class="dish-footer">
                             <span class="dish-price">$10.99</span>
@@ -429,24 +436,38 @@
                 </div>
 
                 <div class="contact-form">
-                    <h3>Catering Inquiry</h3>
-                    <form>
+                    <h3>Contact Form</h3>
+                    <form action="https://api.web3forms.com/submit" method="POST">
+
+                        <!-- Replace with your Access Key -->
+                        <input type="hidden" name="access_key" value="93da09eb-8351-42fc-a132-4f16f4596fc6">
+
+                        <!-- Optional: Subject an be prefilled using type="hidden"
+                               or type="text" for normal user submitted input -->
+                        <input type="hidden" name="subject" value="Message from Bowl29.com Contact Form">
+                        
                         <div class="form-group">
-                            <input type="text" class="form-input" placeholder="Your Name" required>
+                            <input type="text" class="form-input" name="name" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-input" placeholder="Your Email" required>
+                            <input type="email" class="form-input" name="email" placeholder="Your Email" required>
                         </div>
                         <div class="form-group">
-                            <input type="tel" class="form-input" placeholder="Your Phone" required>
+                            <input type="tel" class="form-input" name="phone" placeholder="Your Phone">
                         </div>
                         <div class="form-group">
-                            <textarea class="form-input form-textarea" placeholder="Tell us about your event..." required></textarea>
+                            <textarea class="form-input form-textarea" name="message" placeholder="Tell us about your event..." required></textarea>
                         </div>
+                        <!-- Honeypot Spam Protection -->
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                        
                         <button type="submit" class="btn btn-red" style="width: 100%; padding: 1rem;">
                             Send Message
                         </button>
                     </form>
+
+                    <div id="success-message" style="display:none; color: green; margin-top: 10px;"></div>
+                    
                 </div>
             </div>
         </div>
@@ -522,12 +543,54 @@
           });
         });
 
+        /*
         // Form submission (basic alert for demo)
         document.querySelector('form').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Thank you for your message! We will get back to you soon.');
             this.reset();
         });
+*/
+        
+        //Contact Form Submission
+        document.querySelector('form').addEventListener('submit', function(event) {
+            // Prevent the default form submission
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+
+            // Send the form data to web3forms using fetch
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        // Option A: Use a JavaScript alert (simple)
+                        // alert('Thank you for your message! We will get back to you soon.');
+
+                        // Option B: Display an on-page success message (recommended)
+                        const messageContainer = document.getElementById('success-message');
+                        messageContainer.textContent = 'Thank you for your message! We will get back to you soon.';
+                        messageContainer.style.display = 'block';
+
+                        form.reset(); // Clear the form
+                    } else {
+                        // Handle any errors from web3forms
+                        alert('Something went wrong. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    // Handle network errors or other issues
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                });
+        });        
     </script>
 </body>
 </html>
