@@ -1050,5 +1050,33 @@ html {
     }
 }
 
+.title-with-icon {
+    position: relative;
+    display: inline-block; /* keeps it centered by text-align */
+}
+
+.section-title {
+    position: relative;
+    z-index: 1; /* keep text above if needed */
+}
+
+/* position the icon to the left of the heading */
+.title-icon {
+    position: absolute;
+    left: -22rem;       /* adjust to control horizontal offset */
+    top: 50%;
+    transform: translateY(-50%); /* vertically align with text */
+    width: 15rem;       /* responsive size */
+    height: auto;
+}
+
+/* make it adapt on smaller screens */
+@media (max-width: 600px) {
+    .title-icon {
+        left: -35px;
+        width: 28px;
+    }
+}
+
 
 
