@@ -830,7 +830,7 @@ html {
     }
 }
 
-/* Mobile-friendly schedule table (scrollable)
+/* Mobile-friendly schedule table (scrollable) */
 @media (max-width: 600px) {
     #Schedule {
         display: block;
