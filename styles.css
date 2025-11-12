@@ -30,7 +30,7 @@ body {
 }
 
 .section-padding {
-    padding: 4rem 1rem;
+    padding: 2rem 1rem 4rem;
 }
 
 .text-center {
@@ -1063,8 +1063,8 @@ html {
 /* position the icon to the left of the heading */
 .title-icon {
     position: absolute;
-    left: -22rem;       /* adjust to control horizontal offset */
-    top: 50%;
+    left: -20rem;       /* adjust to control horizontal offset */
+    top: 65%;
     transform: translateY(-50%); /* vertically align with text */
     width: 15rem;       /* responsive size */
     height: auto;
@@ -1082,8 +1082,8 @@ html {
 
 /* Video Story Section Styles */
 .video-story-section {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 0rem;
+    margin-bottom: 5rem;
 }
 
 .video-story-section p{
@@ -1156,4 +1156,7 @@ html {
     color: var(--bowl29-blue);
 }
 
-
+/* Fix for anchor links with fixed header - apply to all sections */
+section[id] {
+    scroll-margin-top: 5rem;
+}
