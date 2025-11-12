@@ -1083,6 +1083,7 @@ html {
 /* Video Story Section Styles */
 .video-story-section {
     margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .video-story-section p{
