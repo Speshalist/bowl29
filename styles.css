@@ -1094,10 +1094,9 @@ html {
 .video-container {
     position: relative;
     width: 90%;
-    max-width: 800px;
+    max-width: 700px;
     margin: 0 auto;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-    height: 0;
+    aspect-ratio: 16 / 9; /* Maintain aspect ratio */
     overflow: hidden;
     border-radius: 1rem;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
