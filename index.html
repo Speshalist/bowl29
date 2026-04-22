@@ -15,6 +15,11 @@
 </head>
     
 <body>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <p>&#127881; <strong>Now Opening May 1st!</strong> Visit us at our new storefront inside <strong>Shepherd's Old Field Market</strong>, next to the Brüdergarten &mdash; 22725 Duke Street, Leonardtown, MD 20650 &#127881;</p>
+    </div>
+
     <!-- Header -->
     <header>
         <nav>
@@ -26,7 +31,7 @@
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="menu.html">Menu</a></li>
-                <li><a href="index.html#location">Location</a></li>
+                <li><a href="index.html#location">Location/Hours</a></li>
                 <li><a href="index.html#about">About</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
@@ -119,6 +124,13 @@
                     <h2 class="section-title">
                         <span class="text-red">Find the</span> <span class="text-green">Yum!</span>
                     </h2>
+                    <div class="title-icon-right-wrap">
+                        <span class="coming-soon-burst">Coming<br>Soon to</span>
+                        <picture>
+                            <source srcset="images/SOFMarket_CartoonStyle_Edit.webp" type="image/webp">
+                            <img src="images/SOFMarket_CartoonStyle_Edit.jpg" alt="Shepherd's Old Field Market" class="title-icon-right">
+                        </picture>
+                    </div>
                 </div>
                 <p class="section-subtitle">
                     When and where we'll be serving!
@@ -308,6 +320,58 @@
     });
 </script>
                     <!-- End Google Sheet Example -->
+
+                    <!-- Storefront Hours -->
+                    <div class="storefront-hours-card">
+                        <h3 class="text-center">Weekly Schedule Starting May 1</h3>
+                        <table class="display storefront-schedule-table" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Day</th>
+                                    <th>Hours</th>
+                                    <th>Location</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Monday</td>
+                                    <td>Closed</td>
+                                    <td>Closed</td>
+                                </tr>
+                                <tr>
+                                    <td>Tuesday</td>
+                                    <td>Closed</td>
+                                    <td>Closed</td>
+                                </tr>
+                                <tr>
+                                    <td>Wednesday</td>
+                                    <td>11:00 AM &ndash; 1:00 PM</td>
+                                    <td>Truck on base</td>
+                                </tr>
+                                <tr>
+                                    <td>Thursday</td>
+                                    <td>11:00 AM &ndash; 1:00 PM</td>
+                                    <td>Truck on base</td>
+                                </tr>
+                                <tr>
+                                    <td>Friday</td>
+                                    <td>11:00 AM &ndash; 7:00 PM</td>
+                                    <td>SOF Market &mdash; 22725 Duke Street, Leonardtown, MD 20650</td>
+                                </tr>
+                                <tr>
+                                    <td>Saturday</td>
+                                    <td>11:00 AM &ndash; 7:00 PM</td>
+                                    <td>SOF Market &mdash; 22725 Duke Street, Leonardtown, MD 20650</td>
+                                </tr>
+                                <tr>
+                                    <td>Sunday</td>
+                                    <td>11:00 AM &ndash; 2:00 PM</td>
+                                    <td>SOF Market &mdash; 22725 Duke Street, Leonardtown, MD 20650</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- End Storefront Hours -->
                     
                     <div class="note-box">
                         <strong>Note:</strong> Schedule may change due to weather or special events. 
@@ -552,10 +616,13 @@
           $(window).on('scroll', function() {
             // Get the current scroll position
             var scrollPosition = $(window).scrollTop();
+                        var announcementHeight = $('.announcement-bar').outerHeight() || 0;
+                        var headerHeight = $('header').outerHeight() || 0;
+                        var navOffset = announcementHeight + headerHeight + 10;
         
             // Loop through each section with a corresponding ID
-            $('div[id], section[id]').each(function() {
-              var sectionTop = $(this).offset().top - 100; // Buffer for better timing
+                        $('section[id]').each(function() {
+                            var sectionTop = $(this).offset().top - navOffset;
               var sectionBottom = sectionTop + $(this).outerHeight();
         
               // Check if the current scroll position is within the section
