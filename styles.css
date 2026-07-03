@@ -201,6 +201,58 @@ nav {
     transform: translateY(-2px);
 }
 
+.order-online-badge-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+.order-online-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(30%, -45%) rotate(8deg);
+    background-color: var(--bowl29-red);
+    color: #fff;
+    padding: 0.42rem 0.62rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 1;
+    clip-path: polygon(
+        0% 20%, 15% 15%, 10% 0%, 30% 12%, 50% 2%, 65% 15%,
+        85% 0%, 85% 18%, 100% 10%, 92% 35%, 100% 55%, 85% 65%,
+        90% 90%, 70% 80%, 65% 100%, 50% 82%, 30% 95%, 25% 75%,
+        0% 85%, 10% 55%, 0% 40%
+    );
+    filter: drop-shadow(2px 2px 0 #000) drop-shadow(-1px -1px 0 #000);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.nav-actions .order-online-badge {
+    right: 0.8rem;
+    transform: translate(15%, -45%) rotate(8deg);
+}
+
+.hero-buttons .order-online-badge {
+    right: 0.8rem;
+    transform: translate(30%, -45%) rotate(8deg);
+}
+
+.order-online-badge::after {
+    content: none;
+}
+
+.nav-actions .order-online-badge::after {
+    content: none;
+}
+
+.hero-buttons .order-online-badge::after {
+    content: none;
+}
+
 .menu-page-header .hero-buttons .btn-outline {
     background: var(--bowl29-green);
     color: white;
@@ -909,6 +961,34 @@ html {
     .nav-actions button {
         width: 100%;
         text-align: center;
+    }
+
+    .nav-actions .order-online-badge-wrap {
+        width: 100%;
+    }
+
+    .nav-actions .order-online-badge-wrap > .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .order-online-badge {
+        font-size: 0.62rem;
+        padding: 0.35rem 0.52rem;
+    }
+
+    .nav-actions .order-online-badge {
+        right: 0.45rem;
+        transform: translate(0, -40%) rotate(8deg);
+    }
+
+    .hero-buttons .order-online-badge {
+        right: 0;
+        transform: translate(24%, -40%) rotate(8deg);
+    }
+
+    .order-online-badge::after {
+        content: none;
     }
 }
 
