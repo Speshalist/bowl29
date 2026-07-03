@@ -25,8 +25,11 @@
         (function () {
             function syncAnnouncementOffset() {
                 const bar = document.querySelector('.announcement-bar');
-                const height = bar ? Math.ceil(bar.getBoundingClientRect().height) : 0;
-                document.documentElement.style.setProperty('--announcement-bar-height', `${height}px`);
+                const header = document.querySelector('header');
+                const announcementHeight = bar ? Math.ceil(bar.getBoundingClientRect().height) : 0;
+                const headerHeight = header ? Math.ceil(header.getBoundingClientRect().height) : 0;
+                document.documentElement.style.setProperty('--announcement-bar-height', `${announcementHeight}px`);
+                document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
             }
 
             syncAnnouncementOffset();
