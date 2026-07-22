@@ -42,3 +42,29 @@ This is a static website for Bowl 29, a fusion food truck in Lusby, MD. The site
 
 ## Architecture
 This is a static website with client-side JavaScript for interactivity. The schedule data is cached in localStorage to reduce API calls to Google Sheets. All content is served via a simple Node.js HTTP server that properly handles MIME types and cache control headers.
+
+## SEO TODO Backlog
+- [ ] Expand structured data beyond baseline
+  - Add consistent Organization or LocalBusiness schema block across all core pages
+  - Add BreadcrumbList schema where breadcrumbs are present
+  - Consider richer Menu schema coverage on menu page sections
+- [ ] Image SEO pass
+  - Add descriptive alt text audit for all high-value images
+  - Add explicit width and height attributes to key page images to improve CLS
+  - Prefer modern formats and compress oversized assets where possible
+- [ ] Internal linking pass
+  - Add contextual in-body links between Home, Menu, Storefront, Food Truck, Contact, and Catering sections
+  - Use anchor text aligned to target intent (ramen, poke, catering, storefront)
+- [ ] Local SEO consistency pass
+  - Verify NAP consistency (name, address, phone) across page copy, schema, and contact references
+  - Normalize formatting and punctuation of address details across all pages
+- [ ] Sitemap maintenance improvements
+  - Keep sitemap lastmod values current with page changes
+  - Evaluate optional image sitemap entries for top visuals
+- [ ] Technical hardening
+  - Add custom 404 page
+  - Confirm redirect policy for www/non-www and trailing slash consistency
+  - Run and fix mobile performance issues (especially media-heavy sections)
+- [ ] Long-tail content expansion
+  - Add concise FAQ and page copy for local-intent terms (ramen in Leonardtown, poke bowls Leonardtown, food truck catering Southern Maryland)
+  - Refresh copy quarterly based on seasonal offerings and events

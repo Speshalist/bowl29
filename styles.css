@@ -99,6 +99,8 @@ nav {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    text-decoration: none;
+    color: inherit;
 }
 
 .logo img {
@@ -330,7 +332,7 @@ nav {
     grid-template-columns: 1fr;
     gap: 3rem;
     align-items: start;
-    margin-top: 7rem;
+    margin-top: 0rem;
 }
 
 .location-card {
@@ -847,6 +849,136 @@ html {
     padding-top: calc(var(--announcement-bar-height) + 5rem); /* Adjust for announcement bar + fixed header */
     background: var(--bowl29-light);
     padding-bottom: 2rem;
+}
+
+.menu-location-callout {
+    margin: 1rem auto 0;
+    max-width: 760px;
+    background: #fff;
+    border-left: 4px solid var(--bowl29-green);
+    color: var(--bowl29-dark);
+    padding: 0.85rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+}
+
+.storefront-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card-heading-with-image {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.card-heading-with-image h2,
+.card-heading-with-image h3 {
+    margin: 0;
+}
+
+.card-heading-image-wrap {
+    flex-shrink: 0;
+    display: block;
+}
+
+.card-heading-image {
+    display: block;
+    width: 8rem;
+    max-width: 100%;
+    height: auto;
+}
+
+.main-storefront-image {
+    width: 16rem;
+    max-width: 45vw;
+}
+
+.main-storefront-heading {
+    position: relative;
+    align-items: flex-start;
+    padding-right: min(45vw, 20rem);
+}
+
+.main-storefront-heading .main-storefront-image-wrap {
+    position: absolute;
+    top: -0.25rem;
+    right: 1rem;
+}
+
+.truck-heading-image {
+    width: 7rem;
+}
+
+@media (max-width: 768px) {
+    .main-storefront-heading {
+        position: static;
+        align-items: center;
+        padding-right: 0;
+    }
+
+    .main-storefront-heading .main-storefront-image-wrap {
+        position: static;
+    }
+
+    .main-storefront-image {
+        width: 10rem;
+        max-width: 45vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-storefront-image {
+        width: 8rem;
+        max-width: 50vw;
+    }
+
+    .card-heading-image {
+        width: 5.5rem;
+    }
+
+    .truck-heading-image {
+        width: 5rem;
+    }
+}
+
+.map-embed-wrap {
+    margin-top: 1rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.main-storefront-map-embed-wrap {
+    margin-top: 2.25rem;
+}
+
+.map-embed-wrap iframe {
+    width: 100%;
+    min-height: 300px;
+    border: 0;
+}
+
+.location-disclaimer {
+    margin-top: 0.75rem;
+    color: #4a5568;
+    font-size: 0.9rem;
+}
+
+.faq-section {
+    background: #fffaf0;
+}
+
+.faq-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
 }
 
 .breadcrumbs {
